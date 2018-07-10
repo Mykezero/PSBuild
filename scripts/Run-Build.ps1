@@ -1,9 +1,8 @@
 function Run-Build {
     Param(
-        [string]$configuration="Release",
+        [object]$project,
         [string]$target="Rebuild",
-        [string]$verbosity="Normal",
-        [object]$project
+        [string]$verbosity="Normal"
     )
 
     $vs_version = "15.0"
@@ -12,5 +11,5 @@ function Run-Build {
     $nuget = "../tools/nuget.exe"
     
     &$nuget restore $solution_dir -Verbosity $verbosity
-    &$msbuild $solution_dir -p:Configuration=$configuration -t:$target /m /verbosity:$verbosity
+    &$msbuild $solution_dir -p:Configuration=$project.configuration -t:$target /m /verbosity:$verbosity
 }

@@ -7,6 +7,7 @@ function New-Project
         Name = $Name
         Location = $Location
         ProjectFile = $ProjectFile
+        Configuration = $Configuration
         Assembly = $Assembly
         Dependencies = $Dependencies
     }
