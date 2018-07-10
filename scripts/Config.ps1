@@ -18,7 +18,7 @@ function Get-Projects {
     $unitTests.Name = "EasyFarm.Tests"
     $unitTests.Location = Find-Child $workspace "EasyFarm.Tests"
     $unitTests.ProjectFile = Find-Child $workspace "EasyFarm.Tests.csproj"
-    $unitTests.Assembly = Find-Child "$workspace" "\\bin\\Debug\\EasyFarm.Tests.dll"
+    $unitTests.Assembly = Find-Child "$workspace" "\\bin\\$configuration\\EasyFarm.Tests.dll"
     $unitTests.Dependencies = @($easyfarm)
 
     $projects = @($easyfarm, $unitTests)
