@@ -1,16 +1,13 @@
-###############################################################################
-## Configuration
-###############################################################################
+function Run-Reporter 
+{
+	Param(
+		[string]$reportDir="../results.xml",
+		[string]$coverageDir="../coverage"
+	)
+	
+	$test_reporter = "..\tools\ReportGenerator.*\tools\ReportGenerator.exe"
 
-$FindParent = "./Find-Parent.ps1"
-$test_reporter = (&$FindParent "EasyFarm") + "\packages\ReportGenerator.*\tools\ReportGenerator.exe"
-$test_report = "../results.xml"
-$coverage_dir = "../coverage"
-
-###############################################################################
-
-&$test_reporter `
-	-reports:"$test_report"  `
-	-targetdir:"$coverage_dir"
-
-###############################################################################
+	&$test_reporter `
+		-reports:"$reportDir"  `
+		-targetdir:"$coverageDir"
+}
