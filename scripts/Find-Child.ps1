@@ -2,14 +2,17 @@ function Find-Child {
 	[CmdletBinding()]
 	Param(
 		[string]$path,
-		[string]$include
+		[string]$filter
 	)
 	(Get-ChildItem `
         -Recurse `
-		-Path $Path `
-		-Include $include | 
+		-Path $Path | 
     Select-Object `
-        -First 1 `
-        -Property FullName `
+		-Property FullName |
+	Where-Object `
+		-Property FullName `
+		-Match $filter |
+	Select-Object `
+		-First 1
 	).FullName
 }

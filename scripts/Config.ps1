@@ -4,6 +4,7 @@ Import-Module .\New-Project.ps1 -Force
 
 function Get-Projects {
     [CmdletBinding()]
+    Param($configuration="Release")
     
     $workspace = $(New-Object System.IO.DirectoryInfo $PSScriptRoot).Parent.Parent.FullName
 
@@ -17,6 +18,7 @@ function Get-Projects {
     $unitTests.Name = "EasyFarm.Tests"
     $unitTests.Location = Find-Child $workspace "EasyFarm.Tests"
     $unitTests.ProjectFile = Find-Child $workspace "EasyFarm.Tests.csproj"
+    $unitTests.Assembly = Find-Child "$workspace" "\\bin\\Debug\\EasyFarm.Tests.dll"
     $unitTests.Dependencies = @($easyfarm)
 
     $projects = @($easyfarm, $unitTests)
