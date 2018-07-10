@@ -2,9 +2,24 @@ Import-Module .\Find-Parent.ps1 -Force
 Import-Module .\Find-Child.ps1 -Force
 Import-Module .\New-Project.ps1 -Force
 
-$easyfarm = New-Project
-$easyfarm.Name = "EasyFarm"
-$easyfarm.Workspace = Find-Parent "EasyFarm"
-$easyfarm.Location = Find-Child "EasyFarm.Tests"
-$easyfarm.ProjectFile = Find-Child $easyfarm.Location "EasyFarm.csproj"
-$easyfarm.Dependencies = @($easyfarm)
+function Get-Projects {
+    [CmdletBinding()]
+    
+    $workspace = $(New-Object System.IO.DirectoryInfo $PSScriptRoot).Parent.Parent.FullName
+
+    $easyfarm = New-Project
+    $easyfarm.Name = "EasyFarm"
+    $easyfarm.Location = Find-Child $workspace "EasyFarm"
+    $easyfarm.ProjectFile = Find-Child $workspace "EasyFarm.csproj"
+    $easyfarm.Dependencies = @()
+
+    $unitTests = New-Project
+    $unitTests.Name = "EasyFarm.Tests"
+    $unitTests.Location = Find-Child $workspace "EasyFarm.Tests"
+    $unitTests.ProjectFile = Find-Child $workspace "EasyFarm.Tests.csproj"
+    $unitTests.Dependencies = @($easyfarm)
+
+    $projects = @($easyfarm, $unitTests)
+
+    $projects
+}
