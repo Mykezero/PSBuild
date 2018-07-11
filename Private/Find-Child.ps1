@@ -4,10 +4,11 @@ function Find-Child {
 		[string]$path,
 		[string]$filter
 	)
-	(Get-ChildItem `
+
+	$path = (Get-ChildItem `
         -Recurse `
 		-Path $Path | 
-    Select-Object `
+	Select-Object `
 		-Property FullName |
 	Where-Object `
 		-Property FullName `
@@ -15,4 +16,6 @@ function Find-Child {
 	Select-Object `
 		-First 1
 	).FullName
+	
+	$path
 }

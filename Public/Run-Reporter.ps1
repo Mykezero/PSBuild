@@ -4,8 +4,8 @@ function Run-Reporter
 		[string]$reportDir="../results.xml",
 		[string]$coverageDir="../coverage"
 	)
-	
-	$test_reporter = "..\tools\ReportGenerator.*\tools\ReportGenerator.exe"
+        $moduleRoot = Find-Parent "PSBuild"
+	$test_reporter = "$moduleRoot\tools\ReportGenerator.*\tools\ReportGenerator.exe"
 
 	&$test_reporter `
 		-reports:"$reportDir"  `

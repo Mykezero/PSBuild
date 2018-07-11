@@ -4,9 +4,10 @@ function Run-Coverage {
 		[string]$filters="+[*]*",
 		[string]$reportDir="../results.xml"
 	)
-
-	$test_runner = "..\tools\xunit.runner.console.*\tools\net452\xunit.console.x86.exe"
-	$test_coverer = "..\tools\OpenCover.*\tools\OpenCover.Console.exe"
+	
+	$moduleRoot = Find-Parent "PSBuild"
+	$test_runner = "$moduleRoot\tools\xunit.runner.console.*\tools\net452\xunit.console.x86.exe"
+	$test_coverer = "$moduleRoot\tools\OpenCover.*\tools\OpenCover.Console.exe"
 	$test_assembly = $project.Assembly
 	$test_coverer_filters = $filters
 	$bin_dir = $(New-Object System.IO.DirectoryInfo -ArgumentList $project.Assembly).Parent.FullName

@@ -2,8 +2,9 @@ function Get-Projects {
     [CmdletBinding()]
     Param($configuration="Release")
     
-    $workspace = $(New-Object System.IO.DirectoryInfo $PSScriptRoot).Parent.Parent.FullName
+    $workspace = (New-Object System.IO.DirectoryInfo $(Find-Parent "PSBuild")).Parent.FullName
 
+    echo $workspace
     $easyfarm = New-Project
     $easyfarm.Name = "EasyFarm"
     $easyfarm.Location = Find-Child $workspace "EasyFarm.sln"
