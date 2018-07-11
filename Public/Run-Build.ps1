@@ -6,7 +6,7 @@ function Run-Build {
     )
 
     $vs_version = "15.0"
-    $solution_dir = $project.Location
+    $solution_dir = $project.SolutionFile
     $msbuild = "C:\Program Files (x86)\Microsoft Visual Studio\*\*\MSBuild\$vs_version\Bin\msbuild.exe"
     $moduleRoot = Find-Parent "PSBuild"
     $nuget = "$moduleRoot/tools/nuget.exe"

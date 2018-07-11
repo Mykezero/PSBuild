@@ -1,10 +1,9 @@
 function Monitor-Tests
 {
-	Param([string]$configuration="Release")
-	$Workspace = Find-Parent "EasyFarm"
+	Param([object]$project)
 
 	$watcher = New-Object System.IO.FileSystemWatcher
-	$watcher.Path = $Workspace
+	$watcher.Path = $project.Location
 	$watcher.IncludeSubdirectories = $true
 	$watcher.EnableRaisingEvents = $true
 	$watcher.NotifyFilter = [System.IO.NotifyFilters]::LastWrite -bor [System.IO.NotifyFilters]::FileName 
@@ -17,9 +16,9 @@ function Monitor-Tests
 
 		Write-Host "### Running Tests ###" -BackgroundColor Green
 		""
-		Run-Build -configuration $configuration -target "Build" -verbosity "Quiet"
+		Run-Build -project $project -target "Build" -verbosity "Quiet"
 		""
-		Run-Tests $configuration
+		Run-Tests -project $project
 		""
 		Write-Host "### Complete! ###" -BackgroundColor Green
 		""

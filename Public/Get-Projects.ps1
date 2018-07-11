@@ -6,14 +6,16 @@ function Get-Projects {
 
     $easyfarm = New-Project
     $easyfarm.Name = "EasyFarm"
-    $easyfarm.Location = Find-Child $workspace "EasyFarm.sln"
+    $easyfarm.SolutionFile = Find-Child $workspace "EasyFarm.sln"
     $easyfarm.ProjectFile = Find-Child $workspace "EasyFarm.csproj"
+    $easyfarm.Location = Find-Child $workspace "EasyFarm"
     $easyfarm.Configuration = $configuration
 
     $unitTests = New-Project
     $unitTests.Name = "EasyFarm.Tests"
-    $unitTests.Location = Find-Child $workspace "EasyFarm.sln"
+    $unitTests.SolutionFile = Find-Child $workspace "EasyFarm.sln"
     $unitTests.ProjectFile = Find-Child $workspace "EasyFarm.Tests.csproj"
+    $unitTests.Location = Find-Child $workspace "EasyFarm.Tests"
     $unitTests.Configuration = $configuration
     $unitTests.Assembly = Find-Child "$workspace" "\\bin\\$configuration\\EasyFarm.Tests.dll"
 
