@@ -4,7 +4,6 @@ function Get-Projects {
     
     $workspace = (New-Object System.IO.DirectoryInfo $(Find-Parent "PSBuild")).Parent.FullName
 
-    echo $workspace
     $easyfarm = New-Project
     $easyfarm.Name = "EasyFarm"
     $easyfarm.Location = Find-Child $workspace "EasyFarm.sln"

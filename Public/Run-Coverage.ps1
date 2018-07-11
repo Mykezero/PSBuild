@@ -2,7 +2,7 @@ function Run-Coverage {
 	Param(
 		[object]$project,
 		[string]$filters="+[*]*",
-		[string]$reportDir="../results.xml"
+		[string]$reportDir="results.xml"
 	)
 	
 	$moduleRoot = Find-Parent "PSBuild"
@@ -19,5 +19,9 @@ function Run-Coverage {
 		-filter:"$test_coverer_filters" `
 		-register:"Path32" `
 		-searchdirs:"$bin_dir"
-	mv -Force results.xml $reportDir
+
+	if("results.xml" -ne "$reportDir")
+	{
+		Copy-Item "results.xml" -Destination "$reportDir" -Force
+	}
 }
