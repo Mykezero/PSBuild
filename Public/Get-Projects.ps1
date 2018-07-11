@@ -1,7 +1,3 @@
-Import-Module .\Find-Parent.ps1 -Force
-Import-Module .\Find-Child.ps1 -Force
-Import-Module .\New-Project.ps1 -Force
-
 function Get-Projects {
     [CmdletBinding()]
     Param($configuration="Release")
